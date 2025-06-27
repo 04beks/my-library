@@ -41,5 +41,10 @@ public class BookServiceImpl implements BookService {
         Book bookFound = findBookById(id);
         bookRepository.delete(bookFound);
     }
+    @Override
+    public List<Book> getAvailableBooks() {
+       return bookRepository.findByAvailableTrue();
+    }
+
 
 }
