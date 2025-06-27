@@ -3,7 +3,6 @@ package com.example.library.controller;
 import com.example.library.dto.BookDto;
 import com.example.library.entity.Book;
 import com.example.library.mapper.BookDtoMapper;
-import com.example.library.service.AuthorService;
 import com.example.library.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,17 +18,31 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
     private final BookDtoMapper bookDtoMapper;
+
     @PostMapping
-    public BookDto createBook(@RequestBody @Valid BookDto bookDto) {
+    public Book createBook(@RequestBody @Valid BookDto bookDto) {
         Book book = bookDtoMapper.toBook(bookDto);
         Book createdBook = bookService.createBook(book);
-        BookDto createdBookDto = bookDtoMapper.toBookDto(createdBook);
-        log.info("Book created: {}", createdBookDto);
-        return createdBookDto;
+        log.info("Book created: {}", createdBook);
+        return createdBook;
     }
 
     @GetMapping
     public List<Book> getAllBooks() {
-       return bookService.findAllBooks();
+        return bookService.findAllBooks();
+    }
+
+    @PutMapping("/{id}")
+    public Book updateBook(@PathVariable Long id, @RequestBody @Valid BookDto bookDto) {
+        Book book = bookDtoMapper.toBook(bookDto);
+        book.setId(id);
+        Book updateBook = bookService.updateBook(id, book);
+        log.info("Book updated: {}", updateBook);
+        return updateBook;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
     }
 }
