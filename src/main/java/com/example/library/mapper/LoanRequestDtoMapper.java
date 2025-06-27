@@ -16,7 +16,7 @@ public class LoanRequestDtoMapper {
 
     public LoanRequestDto toLoanRequestDto( BookLoan bookLoan) {
         LoanRequestDto loanRequestDto1 = new LoanRequestDto();
-        loanRequestDto1.setId((long) bookLoan.getId());
+        loanRequestDto1.setId(bookLoan.getId());
         loanRequestDto1.setBookID(bookLoan.getBook().getId());
         loanRequestDto1.setReaderID(bookLoan.getReader().getId());
         loanRequestDto1.setLoanDate(bookLoan.getLoanDate());
