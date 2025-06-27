@@ -5,6 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 @Data
 public class LoanRequestDto {
+
     private Long id;
     private Long bookID;
     private Long readerID;

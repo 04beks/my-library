@@ -1,8 +1,10 @@
 package com.example.library.controller;
 
+import com.example.library.dto.LoanRequestDto;
 import com.example.library.entity.BookLoan;
 import com.example.library.mapper.LoanRequestDtoMapper;
 import com.example.library.service.BookLoanService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +22,14 @@ public class LoanController {
 
 
     @PostMapping
-    public BookLoan create (@RequestBody BookLoan bookLoan) {
+    public BookLoan create (@RequestBody @Valid LoanRequestDto loanRequestDto) {
+        BookLoan bookLoan = loanRequestDtoMapper.toBookLoan(loanRequestDto);
+        BookLoan bookLoanSaved = bookLoanService.save(bookLoan);
         log.info("Create BookLoan");
-        return bookLoanService.save(bookLoan);
+        return bookLoanSaved;
     }
+
+
 
 
 

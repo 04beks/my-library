@@ -21,7 +21,9 @@ import java.time.LocalDate;
 @Data
 public class BookLoan {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
