@@ -15,12 +15,15 @@ public class Book {
     @Column(name = "title")
     @NotBlank
     private String title;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+
     @Column(name = "isbn", unique = true)
     private String isbn;
+
     @Column(name = "book_availabe")
-    private Boolean available = Boolean.TRUE;
+    private Boolean available;
 
 }

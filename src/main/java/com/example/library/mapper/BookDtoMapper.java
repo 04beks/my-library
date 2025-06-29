@@ -20,6 +20,7 @@ public class BookDtoMapper {
         bookDto.setTitle(book.getTitle());
         bookDto.setAuthorId(book.getAuthor().getId());
         bookDto.setIsbn(book.getIsbn());
+        bookDto.setAvailable(book.getAvailable());
         return bookDto;
     }
 
@@ -28,6 +29,7 @@ public class BookDtoMapper {
         book.setId(bookDto.getId());
         book.setTitle(bookDto.getTitle());
         book.setIsbn(bookDto.getIsbn());
+        book.setAvailable(bookDto.getAvailable());
         if (bookDto.getAuthorId() != null) {
             Author author1 = authorService.findById(bookDto.getAuthorId());
             book.setAuthor(author1);

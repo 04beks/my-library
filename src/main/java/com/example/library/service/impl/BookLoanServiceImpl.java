@@ -1,8 +1,8 @@
 package com.example.library.service.impl;
 
+import com.example.library.dto.LibraryResponse;
 import com.example.library.entity.Book;
 import com.example.library.entity.BookLoan;
-import com.example.library.exception.BookNotAvailableException;
 import com.example.library.repository.BookLoanRepository;
 import com.example.library.service.BookLoanService;
 import com.example.library.service.BookService;
@@ -20,21 +20,33 @@ public class BookLoanServiceImpl implements BookLoanService {
     private final BookService bookService;
 
     @Override
-    public BookLoan save(BookLoan bookLoan) {
+    public LibraryResponse save(BookLoan bookLoan) {
+
         Book book = bookService.findBookById(bookLoan.getBook().getId());
-        if(!book.getAvailable()){
-            return null;
+        LibraryResponse libraryResponse;
+        if (book.getAvailable()) {
+            book.setAvailable(false);
+            bookService.updateBook(book.getId(), book);
+            libraryResponse = LibraryResponse.builder()
+                    .message("Successfully")
+                    .status("200")
+                    .content(bookLoanRepository.save(bookLoan)).build();
+            return libraryResponse;
+        } else {
+            return LibraryResponse.builder()
+                    .message("Book with id " + book.getId() + " is not available")
+                    .status("410").build();
         }
-        return bookLoanRepository.save(bookLoan);
     }
 
     @Override
     public BookLoan getBookLoanById(Long id) {
         return bookLoanRepository.findById(id).orElseThrow(() -> new RuntimeException("BookLoan not found"));
     }
+
     @Override
     public List<BookLoan> getAllBookLoan() {
-        return bookLoanRepository.findAll();
+        return bookLoanRepository.findAllByReturnDateIsNull();
 
     }
 

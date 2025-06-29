@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+import com.example.library.dto.LibraryResponse;
 import com.example.library.dto.LoanRequestDto;
 import com.example.library.entity.BookLoan;
 import com.example.library.mapper.LoanRequestDtoMapper;
@@ -7,10 +8,9 @@ import com.example.library.service.BookLoanService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,14 +21,22 @@ public class LoanController {
     private final LoanRequestDtoMapper loanRequestDtoMapper;
 
 
-    @PostMapping
-    public BookLoan create (@RequestBody @Valid LoanRequestDto loanRequestDto) {
-        BookLoan bookLoan = loanRequestDtoMapper.toBookLoan(loanRequestDto);
-        BookLoan bookLoanSaved = bookLoanService.save(bookLoan);
-        log.info("Create BookLoan");
-        return bookLoanSaved;
+    @GetMapping
+    public List<BookLoan> getLoans() {
+        return bookLoanService.getAllBookLoan();
     }
 
+    @PostMapping
+    public LibraryResponse create(@RequestBody @Valid LoanRequestDto loanRequestDto) {
+        BookLoan bookLoan = loanRequestDtoMapper.toBookLoan(loanRequestDto);
+        return bookLoanService.save(bookLoan);
+    }
+
+    @PutMapping
+    public LibraryResponse update(@RequestBody @Valid LoanRequestDto loanRequestDto) {
+        BookLoan bookLoan = loanRequestDtoMapper.toBookLoan(loanRequestDto);
+        return bookLoanService.save(bookLoan);
+    }
 
 
 
