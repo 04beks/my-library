@@ -39,6 +39,13 @@ public class LoanController {
     }
 
 
+    @PostMapping("/return")
+    public String returnBook(@RequestParam Long readerId, @RequestParam Long bookId) {
+
+        return bookLoanService.returnBook(readerId, bookId);
+    }
+
+
 
 
 }

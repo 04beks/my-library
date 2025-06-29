@@ -10,4 +10,7 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
     List<BookLoan> findAllByReturnDateIsNull();
 
+    BookLoan findByReaderId(Long readerId);
+
+    BookLoan findByReaderIdAndBookId(Long readerId, Long bookId);
 }

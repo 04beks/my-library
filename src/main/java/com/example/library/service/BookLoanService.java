@@ -14,4 +14,8 @@ public interface BookLoanService {
     List<BookLoan> getAllBookLoan();
 
     void deleteBookLoanById(Long id);
+
+    String returnBook(Long id, Long bookId);
+
+
 }

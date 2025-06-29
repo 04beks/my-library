@@ -9,6 +9,7 @@ import com.example.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -54,6 +55,20 @@ public class BookLoanServiceImpl implements BookLoanService {
     public void deleteBookLoanById(Long id) {
         BookLoan bookLoan = getBookLoanById(id);
         bookLoanRepository.delete(bookLoan);
+    }
+
+    @Override
+    public String returnBook(Long id, Long bookId) {
+        BookLoan bookLoan = bookLoanRepository.findByReaderIdAndBookId(id, bookId);
+        if (bookLoan != null) {
+            bookLoan.setReturnDate(LocalDate.now());
+            Book book = bookService.findBookById(bookLoan.getBook().getId());
+            book.setAvailable(true);
+            bookService.updateBook(book.getId(), book);
+            bookLoanRepository.deleteById(bookLoan.getId());
+            return "Successfully Returned";
+        }
+        return "BookLoan not found";
     }
 
 }
