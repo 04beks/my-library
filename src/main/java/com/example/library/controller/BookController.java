@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/books")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class BookController {
     private final BookService bookService;
     private final BookDtoMapper bookDtoMapper;

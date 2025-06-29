@@ -16,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/loans")
 @Slf4j
+@CrossOrigin("*")
 public class LoanController {
     private final BookLoanService bookLoanService;
     private final LoanRequestDtoMapper loanRequestDtoMapper;
@@ -45,7 +46,10 @@ public class LoanController {
         return bookLoanService.returnBook(readerId, bookId);
     }
 
-
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        bookLoanService.deleteBookLoanById(id);
+    }
 
 
 }

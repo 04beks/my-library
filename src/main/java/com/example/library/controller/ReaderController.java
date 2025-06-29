@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/readers")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class ReaderController {
     private final ReaderService readerService;
     private final ReaderDtoMapper readerDtoMapper;
