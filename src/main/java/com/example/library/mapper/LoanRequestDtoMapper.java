@@ -6,7 +6,6 @@ import com.example.library.service.BookService;
 import com.example.library.service.ReaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
 @RequiredArgsConstructor
@@ -14,7 +13,7 @@ public class LoanRequestDtoMapper {
     private final BookService bookService;
     private final ReaderService readerService;
 
-    public LoanRequestDto toLoanRequestDto( BookLoan bookLoan) {
+    public LoanRequestDto toLoanRequestDto(BookLoan bookLoan) {
         LoanRequestDto loanRequestDto1 = new LoanRequestDto();
         loanRequestDto1.setId(bookLoan.getId());
         loanRequestDto1.setBookID(bookLoan.getBook().getId());
@@ -25,7 +24,7 @@ public class LoanRequestDtoMapper {
     }
 
 
-    public BookLoan toBookLoan( LoanRequestDto loanRequestDto) {
+    public BookLoan toBookLoan(LoanRequestDto loanRequestDto) {
         BookLoan bookLoan = new BookLoan();
         bookLoan.setId(loanRequestDto.getId());
         bookLoan.setBook(bookService.findBookById(loanRequestDto.getBookID()));

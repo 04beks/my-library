@@ -4,12 +4,12 @@ import com.example.library.dto.ReaderDto;
 import com.example.library.entity.Reader;
 import com.example.library.mapper.ReaderDtoMapper;
 import com.example.library.service.ReaderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/readers")
@@ -20,11 +20,27 @@ public class ReaderController {
     private final ReaderDtoMapper readerDtoMapper;
 
     @PostMapping
-    public ReaderDto createReader(@RequestBody ReaderDto readerDto) {
+    public Reader createReader(@RequestBody ReaderDto readerDto) {
         Reader reader = readerDtoMapper.toReader(readerDto);
-        Reader result = readerService.createReader(reader);
-        ReaderDto readerDto1 = readerDtoMapper.toReaderDto(result);
-        log.info("Created reader : {}", readerDto1);
-        return readerDto1;
+        return readerService.createReader(reader);
+    }
+
+
+    @GetMapping
+    public List<Reader> getAllReaders() {
+        return readerService.getAllReaders();
+    }
+
+    @PutMapping
+    public Reader updateReader(@RequestBody ReaderDto readerDto, @PathVariable Long id) {
+        Reader reader = readerDtoMapper.toReader(readerDto);
+        reader.setId(id);
+        return readerService.updateReader(id,reader);
+
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteReader(@PathVariable Long id) {
+        readerService.deleteReader(id);
     }
 }
