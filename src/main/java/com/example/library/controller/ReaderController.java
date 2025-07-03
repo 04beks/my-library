@@ -4,7 +4,6 @@ import com.example.library.dto.ReaderDto;
 import com.example.library.entity.Reader;
 import com.example.library.mapper.ReaderDtoMapper;
 import com.example.library.service.ReaderService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ public class ReaderController {
     public Reader updateReader(@RequestBody ReaderDto readerDto, @PathVariable Long id) {
         Reader reader = readerDtoMapper.toReader(readerDto);
         reader.setId(id);
-        return readerService.updateReader(id,reader);
+        return readerService.updateReader(id, reader);
 
     }
 
