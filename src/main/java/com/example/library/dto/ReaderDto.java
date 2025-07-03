@@ -1,5 +1,6 @@
 package com.example.library.dto;
 
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data

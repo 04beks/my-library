@@ -16,13 +16,16 @@ import lombok.Data;
 @Entity
 @Data
 public class Reader {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reader_id")
     private Long id;
+
     @NotBlank
     @Column(name = "reader_name")
     private String fullName;
+
     @Email
     @Column(name = "reader_email")
     private String email;

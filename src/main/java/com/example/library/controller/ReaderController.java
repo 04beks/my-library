@@ -4,6 +4,7 @@ import com.example.library.dto.ReaderDto;
 import com.example.library.entity.Reader;
 import com.example.library.mapper.ReaderDtoMapper;
 import com.example.library.service.ReaderService;
+import com.example.library.service.impl.ReaderClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ReaderController {
     private final ReaderService readerService;
     private final ReaderDtoMapper readerDtoMapper;
+    private final ReaderClientService readerClientService;
 
     @PostMapping
     public Reader createReader(@RequestBody ReaderDto readerDto) {
@@ -42,5 +44,11 @@ public class ReaderController {
     @DeleteMapping("{id}")
     public void deleteReader(@PathVariable Long id) {
         readerService.deleteReader(id);
+    }
+
+    @PostMapping("/save-reader")
+    public Reader saveReaderThroughApi() {
+        return readerClientService.saveReaderThroughApi();
+
     }
 }
