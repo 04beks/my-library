@@ -1,8 +1,6 @@
 package com.example.library.service.impl;
 
-import com.example.library.dto.BookDto;
 import com.example.library.entity.Book;
-import com.example.library.repository.BookRepository;
 import com.example.library.service.BookClient;
 import com.example.library.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,7 @@ public class BookClientService {
         bookService.createBook(book);
     }
 
-    @Scheduled(fixedRate = 60*60*1000)
+    @Scheduled(fixedRate = 60 * 60 * 1000)
     public void scheduleBookName() {
         bookClient();
     }
