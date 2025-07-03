@@ -1,6 +1,7 @@
 package com.example.library.service;
 
 import com.example.library.dto.RandomReaderResponse;
+import jakarta.annotation.PostConstruct;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface ReaderClient {
     @GetMapping("/api/")
     RandomReaderResponse getRandomReader();
+
+
 
 
 }
