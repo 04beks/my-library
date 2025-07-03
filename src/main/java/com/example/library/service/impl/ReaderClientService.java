@@ -20,14 +20,10 @@ public class ReaderClientService {
 
     public Reader saveReaderThroughApi() {
         RandomReaderResponse randomReaderResponse = readerClient.getRandomReader();
-
-
         ReaderDto readerDto = new ReaderDto();
         readerDto.setEmail(randomReaderResponse.getResults().get(0).getEmail());
         readerDto.setFullName(randomReaderResponse.getResults().get(0).getName().getFirst() + " " +
                 randomReaderResponse.getResults().get(0).getName().getLast());
-
-
         return readerService.createReader(readerDtoMapper.toReader(readerDto));
     }
 
