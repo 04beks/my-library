@@ -1,6 +1,8 @@
 package com.example.library.service;
 
 import com.example.library.entity.Book;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -16,4 +18,7 @@ public interface BookService {
     void deleteBook(Long id);
 
     List<Book> getAvailableBooks();
+
+
+    ResponseEntity<Resource> getBook(String filename);
 }
