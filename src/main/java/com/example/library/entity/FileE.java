@@ -1,8 +1,6 @@
 package com.example.library.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class FileE {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fileName;
     private String  filePath;
