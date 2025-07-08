@@ -2,7 +2,6 @@ package com.example.library.service.impl;
 
 import com.example.library.dto.RandomReaderResponse;
 import com.example.library.dto.ReaderDto;
-import com.example.library.dto.ReaderUser;
 import com.example.library.entity.Reader;
 import com.example.library.mapper.ReaderDtoMapper;
 import com.example.library.service.ReaderClient;
